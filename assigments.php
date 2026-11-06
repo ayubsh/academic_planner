@@ -10,7 +10,8 @@ $result = mysqli_query($conn, $sql);
 
 
 ?>
-<main>
+<link rel="stylesheet" href="style.css">
+<main class="container">
   <h1>Assigments</h1>
 
 <table class="data-table">
