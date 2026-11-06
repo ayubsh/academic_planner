@@ -11,6 +11,7 @@ $result = mysqli_query($conn, $sql);
 
 ?>
 <link rel="stylesheet" href="style.css">
+<?php require 'header.php'?>
 <main class="container">
   <h1>Assigments</h1>
 
