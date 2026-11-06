@@ -11,6 +11,8 @@ $result = mysqli_query($conn, $sql);
 ?>
 
 <link rel="stylesheet" href="style.css">
+
+<?php require 'header.php' ?>
 <main class="container">
 
 <section class="hero">
