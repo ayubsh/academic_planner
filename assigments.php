@@ -13,9 +13,6 @@ $result = mysqli_query($conn, $sql);
 $row_count = mysqli_num_rows($result);
 ?>
 
-
-
-?>
 <link rel="stylesheet" href="style.css">
 <?php require 'header.php'?>
 <main class="container">
