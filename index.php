@@ -5,9 +5,18 @@ if (!$conn) {
 }
 
 
-$sql = "SELECT id, title, course_id, due_date, completed FROM tasks WHERE completed = 0 ORDER BY title";
-$result = mysqli_query($conn, $sql);
+$student_id = 1; // demo student until login
 
+$stmt = mysqli_prepare($conn, "SELECT COUNT(*) AS total, COALESCE(SUM(completed), 0) AS done FROM tasks WHERE user_id = ?");
+mysqli_stmt_bind_param($stmt, "i", $student_id);
+mysqli_stmt_execute($stmt);
+$stats = mysqli_fetch_assoc(mysqli_stmt_get_result($stmt));
+$total = (int) $stats['total'];
+$done = (int) $stats['done'];
+$pending = $total - $done;
+$percent = $total > 0 ? round($done / $total * 100) : 0;
+
+$course_count = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS c FROM courses"))['c'];
 ?>
 
 <link rel="stylesheet" href="style.css">
@@ -23,19 +32,19 @@ $result = mysqli_query($conn, $sql);
 <section class="stats">
     <div class="card">
         <h3>Completion</h3>
-        <p class="big-number">33%</p>
+<p class="big-number"><?php echo $percent ?> %</p>
     </div>
     <div class="card">
         <h3>Completed Tasks</h3>
-        <p class="big-number">1</p>
+<p class="big-number"><?php echo $done ?></p>
     </div>
     <div class="card">
         <h3>Pending Tasks</h3>
-        <p class="big-number">2</p>
+<p class="big-number"><?php echo $pending?></p>
     </div>
     <div class="card">
         <h3>Courses</h3>
-        <p class="big-number">3</p>
+<p class="big-number"><?php echo $course_count?></p>
     </div>
 </section>
 
