@@ -1,3 +1,13 @@
+<?php
+$conn = mysqli_connect("localhost", "root", "", "academic_planner");
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+$courses = mysqli_query($conn, "SELECT id, course_code, course_name FROM courses ORDER BY course_code");
+?>
+
+
 
 <link rel="stylesheet" href="style.css">
 <?php include "./header.php"
@@ -14,9 +24,11 @@
     <label for="course_id">Course</label>
     <select id="course_id" name="course_id" required>
         <option value="">-- Select a course --</option>
-        <option value="1">SE 250 - Software Engineering</option>
-        <option value="2">CS 301 - Data Structures</option>
-        <option value="3">ENG 101 - College Composition</option>
+        <?php while ($c = mysqli_fetch_assoc($courses)) { ?>
+            <option value="<?php echo (int) $c['id']; ?>">
+                <?php echo htmlspecialchars($c['course_code'] . " - " . $c['course_name']); ?>
+            </option>
+        <?php } ?>
     </select>
 
     <label for="due_date">Due Date</label>
