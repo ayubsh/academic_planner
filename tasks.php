@@ -24,6 +24,7 @@ $row_count = mysqli_num_rows($result);
 
 <h2>My Tasks</h2>
 
+<?php if ($row_count > 0): ?>
 <table class="data-table">
     <tr>
         <th>Course</th>
@@ -31,16 +32,6 @@ $row_count = mysqli_num_rows($result);
         <th>Due Date</th>
         <th>Status</th>
         <th>Actions</th>
-    </tr>
-    <tr>
-        <td>SE 250</td>
-        <td>Screenshot each page for D2L</td>
-        <td>2026-11-05</td>
-        <td>Pending</td>
-        <td class="actions">
-            <button type="button" class="button-small">Mark complete</button>
-            <button type="button" class="button-small button-danger">Delete</button>
-        </td>
     </tr>
       <?php while ($row = mysqli_fetch_assoc($result)) { ?>
         <tr>
@@ -50,12 +41,12 @@ $row_count = mysqli_num_rows($result);
             <td><?php echo $row["completed"] ? "Completed" : "Pending"; ?></td>
             <td class="actions">
                 <?php if (!$row["completed"]): ?>
-                <form action="handlers/update_task.php" method="post">
+                <form action="update_task.php" method="post">
                     <input type="hidden" name="id" value="<?php echo (int) $row["id"]; ?>">
                     <button type="submit" class="button-small">Mark complete</button>
                 </form>
                 <?php endif; ?>
-                <form action="handlers/delete_task.php" method="post" onsubmit="return confirm('Delete this task?');">
+                <form action="delete_task.php" method="post" onsubmit="return confirm('Delete this task?');">
                     <input type="hidden" name="id" value="<?php echo (int) $row["id"]; ?>">
                     <button type="submit" class="button-small button-danger">Delete</button>
                 </form>
@@ -63,5 +54,9 @@ $row_count = mysqli_num_rows($result);
         </tr>
         <?php } ?>
 </table>
+<?php else: ?>
+    <p>No tasks yet. <a href="task_form.php">Add your first task</a>.</p>
+<?php endif; ?>
+
 
 </main>
