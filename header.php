@@ -3,7 +3,7 @@
     <nav class="site-nav">
         <a href="index.php">Dashboard</a>
         <a href="assigments.php">Assignments</a>
-        <a href="tasks.html">My Tasks</a>
+        <a href="tasks.php">My Tasks</a>
         <a href="task_form.php">Add Task</a>
     </nav>
 </header>
