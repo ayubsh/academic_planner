@@ -20,6 +20,7 @@ $row_count = mysqli_num_rows($result);
 <?php require 'header.php'?>
 <main class="container">
   <h1>Assigments</h1>
+<?php if ($row_count > 0): ?>
     <table class="data-table">
         <tr>
             <th>Course</th>
@@ -36,6 +37,9 @@ $row_count = mysqli_num_rows($result);
         </tr>
         <?php } ?>
     </table>
+<?php else: ?>
+    <p>No assignments have been posted yet.</p>
+<?php endif; ?>
 
 
 </main>
