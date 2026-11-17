@@ -20,6 +20,7 @@ $row_count = mysqli_num_rows($result);
 ?>
 
 <link rel="stylesheet" href="style.css">
+<?php include "./header.php" ?>
 <main class="container">
 
 <h2>My Tasks</h2>
