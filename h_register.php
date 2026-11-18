@@ -1,7 +1,7 @@
 <?php
 include 'db.php'
 include 'auth.php';
-require_post('/register.php');
+require_post('./register.php');
 
 $username = trim($_POST['username'] ?? '');
 $full_name = trim($_POST['full_name'] ?? '');
